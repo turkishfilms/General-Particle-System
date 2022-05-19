@@ -7,6 +7,7 @@ class ParticleSystem {
         this.particles = []
         this.simIsOn = true
         this.iterationsBeforeShow = 3
+        this.initQTs()
     }
 
     addParticle = (particle) =>{

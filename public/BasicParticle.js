@@ -42,7 +42,8 @@ class BasicParticle {
 
     move(options) {
         this.o = (this.o + options.deltaO + TWO_PI) % TWO_PI
-        this.x = (((this.v + options.deltaV) * cos(this.o)) + this.x + width) % width
-        this.y = (((this.v + options.deltaV) * sin(this.o)) + this.y + height) % height
+        this.v += options.deltaV
+        this.x = (((this.v) * cos(this.o)) + this.x + width) % width
+        this.y = (((this.v) * sin(this.o)) + this.y + height) % height
     }
 }
