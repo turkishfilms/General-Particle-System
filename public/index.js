@@ -2,7 +2,7 @@
  * TODO::
  * particles can have more than one "lookup" qt but are always inserted into qts of thier own type ?? right
  * perhaps making a child of basic particl called qtextendedparticle
- * 
+ * make pause keep particles on screen
  * 
  * 
 
@@ -10,10 +10,22 @@
 
 
 
+//  const ya = (this) => {
+//     this.x = x
+//     this.y = y
+//     this.o = o // orientation
+//     this.v = v // velocity
+//     this.r = r // how far agent can see
+//     this.radius = radius // size of agent
+//     this.cols = cols // cols
+//     this.shouldMove = shouldMove
+//     this.shouldShow = shouldShow
+//     this.qtIndex = qtIndex
+//     this.qt
+//     this.neighbors = []
+// }
 
-
-let paused = false,
-    numParticles = 400,
+let numParticles = 400,
     system
 
 function setup() {
@@ -21,33 +33,25 @@ function setup() {
     background(150, 85, 35)
     createCanvas(windowWidth, windowHeight)
     noStroke()
-    system = new ParticleSystem({ qtCapacities: [6, 3] })
-    for (let k = 0; k < 20; k++) {
-        system.addParticle(new BasicParticle({ radius: 4, qt:0 }))
-    }
-    for (let k = 0; k < 200; k++) {
-        system.addParticle(new PrimordialParticle({ radius: 6, qt:1 }))
-    }
-    for (let k = 0; k < numParticles; k++) {
-        system.addParticle(new SpeedParticle({ speedIncrement: 0.1, radius: 10, v: 0.5 ,qt:1}))
-    }
-}
+    system = new ParticleSystem({ qtCapacities: [1] })
 
-const togglePause = () => {
-    paused = paused ? false : true
-    system.togglePause()
+    for (let k = 0; k < 1000; k++) {
+        system.addParticle(new InfectionParticle({ infectionLevel: 0.1, radius: 5, infectability: 0.1, }))
+    }
+
 }
 
 function keyPressed() {
-    if (key == ' ') togglePause()
+    if (key == ' ') {
+        // noLoop()
+        system.togglePause()
+    }
 }
 
 function draw() {
-    if (!paused) {
-        // background(23);
-        background(150, 85, 35)
+    // background(150, 85, 35)
+    if (system.simIsOn) {
+        background(0)
         system.nextFrame()
     }
-
-    // ellipse(width / 4, height / 2, system.particles[0].r)
 }

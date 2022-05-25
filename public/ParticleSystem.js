@@ -1,5 +1,5 @@
 class ParticleSystem {
-    constructor({ width = 100, height = 100, qtCapacities = [4, 3] } = {}) {
+    constructor({ width = 100, height = 100, qtCapacities = [1] } = {}) {
         this.width = width
         this.height = height
         this.qts = []
@@ -10,12 +10,8 @@ class ParticleSystem {
         this.initQTs()
     }
 
-    addParticle = (particle) =>{
+    addParticle = (particle) => {
         this.particles.push(particle)
-    }
-
-    addParticles = () => {
-
     }
 
     initQTs = () => {
@@ -29,12 +25,19 @@ class ParticleSystem {
 
     reset = () => {}
 
-    fillQTs = () => { this.particles.forEach(particle => this.qts[particle.qt].insert(particle)) }
+    fillQTs = () => {
+        this.particles.forEach(particle => {
+            // if (particle == this.particles[0]) console.log(this, particle)
+            this.qts[particle.qtIndex].insert(particle)
+            particle.addQT(this.qts[particle.qtIndex])
+        })
+    }
 
     nextFrame = () => {
-        if(!this.simIsOn) return
-        this.initQTs()
-        this.fillQTs()
-        this.particles.forEach(particle => particle.step())
+        if (this.simIsOn) {
+            this.initQTs()
+            this.fillQTs()
+            this.particles.forEach(particle => particle.step())
+        }
     }
 }

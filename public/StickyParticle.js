@@ -1,60 +1,54 @@
-class StickyParticle extends BasicParticle {
+/**
+ * TODO::
+ * decide color mapping to collision count
+ * 
+ * 
+ * 
+ */
+class StickyParticle extends QTParticle {
     constructor({
-        x = 100,
-        y = 100,
-        o = 3.14,
-        v = 1,
-        radius = 5,
-        cols = [
-            [255, 255, 255],
-            [0, 0, 0]
-        ],
-        a = 6
+        ...options
     } = {}) {
-        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols })
-        this.neighbors = []
-        this.a = a
-        this.collisionthreshold = 2
-        this.nearestNeigbor
+        const {
+            x = random(0, width),
+                y = random(0, height),
+                o = random(0, PI),
+                v = 1,
+                radius = 10,
+                r = radius,
+                cols = [
+                    [75, 20, 50, ],
+                    [150, 20, 50],
+                    [210, 20, 50],
+                    [255, 20, 50]
+                ],
+                qtIndex = 0,
+                shouldShow = true,
+                shouldMove = true
+        } = options
+        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove, r: r, qtIndex: qtIndex, })
+        this.collisionCount = 0
     }
 
-    isOutOfBounds(box) {
-        return (this.x + this.radius >= box.maxX) ||
-            (this.x + this.radius <= box.minX) ||
-            (this.y + this.radius >= box.maxY) ||
-            (this.y + this.radius <= box.minY)
+    nextStep() {
+        this.updateNeighbors()
+        const collided = this.updateCollisionCount()
+        return { deltaV: 0, deltaO: (!collided ? 0:PI), color: this.correctColor() }
+
+        return { deltaV: 0, deltaO: 0, color: this.correctColor() }
     }
 
-    updateNeighbors() {
-        this.n = qt.find(this)
-    }
-
-    findAngleToNeighbor(neighbor) {
-        return atan2(this.x, this.y, neighbor.x, neighbor.y)
-    }
-
-    distanceTo(neighbor) {
-        return dist(this.x, neighbor.x, this.y, neighbor.y)
-    }
-
-    hasCollided() {
-        const n = findNeighbors()
-        for (let i = 0; i < n.length; i++) {
-            const e = n[i];
-            if (distanceTo(e) < this.r) return { e }
+    updateCollisionCount() {
+        this.collisionCount += this.neighbors.length - 1
+        if (this.collisionCount >= this.cols.length) {
+            this.shouldMove = false
         }
-        return false
+        return this.neighborsCount > 1
     }
 
-    updateO() { //return dif between current o and desired o
-        const collided = hasCollided()
-        if (isOutOfBounds()) return PI
-        // return collided == false ? 0 : findAngleToNeighbor(collided) + PI
-        if (collided != false) return findAngleToNeighbor(collided) + PI
-        return 0
+    correctColor() {
+        if (!this.shouldMove) return { r: this.cols[0][0], g: this.cols[0][1], b: this.cols[0][2] }
+        return { r: this.cols[(this.collisionCount + 1) % this.cols.length][0], g: this.cols[(this.collisionCount + 1) % this.cols.length][1], b: this.cols[(this.collisionCount + 1) % this.cols.length][2] }
     }
 
-    updateV() {
-        if (this.shouldMove == false) return -this.v
-    }
 }

@@ -1,3 +1,13 @@
+/**
+ * TODO
+ * add square search not just circle search
+ * add arbitrary shape search
+ * object destructure and optional inputs to ask
+ * 
+ * 
+ * 
+ */
+
 class Quadtree { 
     constructor({ x = 0, y = 0, sizex = width, sizey = height, capacity = 10 } = {}) {
         this.x = x;

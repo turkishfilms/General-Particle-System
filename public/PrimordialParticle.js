@@ -24,9 +24,12 @@ class PrimordialParticle extends BasicParticle {
             [0, 255, 0],
         ],
         thresholds = [35, 30, 20, 0],
-        qt = 0
+        qtIndex = 0,
+        shouldMove = true,
+        shouldShow = true,
+
     } = {}) {
-        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols })
+        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove })
         this.x = x
         this.y = y
         this.o = o // orientation
@@ -38,7 +41,10 @@ class PrimordialParticle extends BasicParticle {
         this.neighbors = []
         this.cols = cols // cols
         this.thresholds = thresholds.sort().reverse()
-        this.qt = qt
+        this.qtIndex = qtIndex
+        this.qt
+        this.shouldMove = shouldMove
+        this.shouldShow = shouldShow
         // --RULES--
         //     yellow when => 35 neighbors
         //     magenta when => 20 and < 35
@@ -55,7 +61,7 @@ class PrimordialParticle extends BasicParticle {
         // which way to turn
         const B = this.steer(leftNeighbors.length, rightNeighbors.length) //problem could be here
 
-        return { deltaO: this.a + B, deltaV: 0 , color: this.correctColor()}
+        return { deltaO: this.a + B, deltaV: 0, color: this.correctColor() }
     }
 
     updateNeighbors() {
@@ -92,7 +98,7 @@ class PrimordialParticle extends BasicParticle {
 
     correctColor() {
         for (let i = 0; i < this.thresholds.length; i++) {
-            if (this.neighbors.length  >= this.thresholds[i]) return {
+            if (this.neighbors.length >= this.thresholds[i]) return {
                 r: this.cols[i % this.cols.length][0],
                 g: this.cols[i % this.cols.length][1],
                 b: this.cols[i % this.cols.length][2]

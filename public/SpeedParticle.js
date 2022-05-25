@@ -1,35 +1,42 @@
-class SpeedParticle extends BasicParticle {
+class SpeedParticle extends QTParticle {
     constructor({
-        x = random(0, width),
-        y = random(0, height),
-        o = random(0, PI),
-        v = 1,
-        radius = 5,
-        cols = [
-            [120, 200, 120],
-            [100, 100, 250],
-            [255, 20, 180],
-            [30, 100, 250],
-        ],
-        r = radius,
         thresholds = [10, 7, 3, 1],
         speedIncrement = 0.01,
-        qt = 0
+        ...options
     } = {}) {
-        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols })
-        this.x = x
-        this.y = y
-        this.o = o // orientation
-        this.v = v // velocity
-        this.radius = radius // size of agent
-        this.cols = cols
-        this.r = r
+        const {
+            x = random(0, width),
+                y = random(0, height),
+                o = random(0, PI),
+                v = 1,
+                radius = 5,
+                cols = [
+                    [120, 200, 120],
+                    [100, 100, 250],
+                    [255, 20, 180],
+                    [30, 100, 250],
+                ],
+                shouldShow = true,
+                shouldMove = true,
+                r = radius,
+                qtIndex = 0,
+        } = options
+        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove, r: r, qtIndex: qtIndex, })
+        this.thresholds = thresholds.sort((a, b) => a - b).reverse()
         this.speedIncrement = speedIncrement
-        this.thresholds = thresholds.sort((a,b)=>a-b).reverse()
-        this.neighbors = []
-        this.qt = qt
-        const { x: qtx, y: qty, sizex, sizey } = system.qts[this.qt]
-        this.box = { minX: qtx, maxX: qtx + sizex, minY: qty, maxY: qty + sizey }
+        this.box = this.initBox()
+    }
+
+    nextStep() {
+        this.updateNeighbors()
+        const collisions = this.neighborsCount - 1
+        const color = this.correctColor()
+        return { deltaO: ((collisions > 0 || this.isOutOfBounds(box)) ? PI : 0), deltaV: (this.speedIncrement * collisions), color: color }
+    }
+
+    initBox = () => {
+        const { x, y, sizex, sizey } = system.qts[this.qtIndex]
+        return { minX: x, maxX: x + sizex, minY: y, maxY: y + sizey }
     }
 
     isOutOfBounds(box) {
@@ -39,30 +46,8 @@ class SpeedParticle extends BasicParticle {
             (this.y + this.radius <= box.minY)
     }
 
-    collisionCount() {
-        return this.neighbors.length - 1
-    }
-
-    updateNeighbors() {
-        this.neighbors = []
-        this.neighbors = this.findNeighbors()
-    }
-
-    findNeighbors() {
-        return system.qts[this.qt].ask(this, this.neighbors)
-    }
-
-    isFirst(){return this == system.particles[0]}
-
-    nextStep() {
-        this.updateNeighbors()
-        const collisions = this.collisionCount()
-        const color= this.correctColor()
-        return { deltaO: ((collisions > 0 || this.isOutOfBounds(box)) ? PI : 0), deltaV: (this.speedIncrement * collisions), color: color }
-    }
-
     correctColor() {
-        if(this.isFirst()) console.log(this.thresholds.length, this.cols.length)
+        if (this.isFirst()) console.log(this.thresholds.length, this.cols.length)
         for (let i = 0; i < this.thresholds.length; i++) {
             if (this.v >= this.thresholds[i]) return {
                 r: this.cols[i % this.cols.length][0],

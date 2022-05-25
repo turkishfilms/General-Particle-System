@@ -11,7 +11,8 @@ class BasicParticle {
             [0, 0, 255],
             [0, 255, 0]
         ],
-        qt
+        shouldShow = true,
+        shouldMove = true,
     } = {}) {
         this.x = x
         this.y = y
@@ -19,10 +20,8 @@ class BasicParticle {
         this.v = v
         this.radius = radius
         this.cols = cols
-        this.shouldShow = true
-        this.shouldMove = true
-        this.showDefault = true
-        this.qt = qt
+        this.shouldShow = shouldShow
+        this.shouldMove = shouldMove
     }
 
     step() {
