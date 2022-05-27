@@ -2,18 +2,12 @@ class QTParticle extends BasicParticle {
     constructor({
         qtIndex = 0,
         neighbors = [],
+        r = 15,
         ...options
     } = {}) {
-        super({ x: options.x, y: options.y, o: options.o, v: options.v, radius: options.radius, cols: options.cols, shouldShow: options.shouldShow, shouldMove: options.shouldMove })
-        this.x = options.x
-        this.y = options.y
-        this.o = options.o
-        this.v = options.v
-        this.r = options.r
-        this.radius = options.radius
-        this.cols = options.cols
-        this.shouldShow = options.shouldShow
-        this.shouldMove = options.shouldMove
+        const { x, y, o, v, radius, cols, shouldShow, shouldMove } = options
+        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove })
+        this.r = r
         this.qtIndex = qtIndex
         this.neighbors = neighbors
         this.neighborsCount = 0

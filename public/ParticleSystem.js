@@ -1,3 +1,19 @@
+/**
+ *TODO:
+ reset
+ an array of reset objects is passed in at instantiation
+ a reset onbject per Quadtree
+ resetobj = {
+     targetQT:
+     specific proeperty:
+     value of proeperty
+    percentage of population needed to trigger
+ } 
+
+
+
+ */
+
 class ParticleSystem {
     constructor({ width = 100, height = 100, qtCapacities = [1] } = {}) {
         this.width = width
@@ -21,7 +37,16 @@ class ParticleSystem {
 
     togglePause = () => { this.simIsOn = this.simIsOn ? false : true }
 
-    resetCondition = () => {}
+    resetCondition = (targetQT) => {
+        let tot = 0
+        let nah = true
+        this.particles.forEach(p=>{
+            if(p.qt==targetQT && p.v==0){
+
+            }else nah = false
+        })
+        return nah
+    }
 
     reset = () => {}
 

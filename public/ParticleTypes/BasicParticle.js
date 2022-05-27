@@ -3,8 +3,8 @@ class BasicParticle {
         x = random(0, width),
         y = random(0, height),
         o = random(0, TWO_PI),
-        v = 0.67 * 3,
-        radius = 5 * 3,
+        v = 2,
+        radius = 15,
         cols = [
             [255, 255, 0],
             [255, 0, 255],

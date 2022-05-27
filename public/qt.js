@@ -47,10 +47,10 @@ class Quadtree {
     subdivide() {
         const w = this.sizex / 2,
             h = this.sizey / 2
-        this.children.push(new Quadtree({ x: this.x, y: this.y, sizex: w, sizey: h }));
-        this.children.push(new Quadtree({ x: this.x + w, y: this.y, sizex: w, sizey: h }));
-        this.children.push(new Quadtree({ x: this.x, y: this.y + h, sizex: w, sizey: h }));
-        this.children.push(new Quadtree({ x: this.x + w, y: this.y + h, sizex: w, sizey: h }));
+        this.children.push(new Quadtree({ x: this.x, y: this.y, sizex: w, sizey: h, capacity:this.capacity}));
+        this.children.push(new Quadtree({ x: this.x + w, y: this.y, sizex: w, sizey: h, capacity:this.capacity }));
+        this.children.push(new Quadtree({ x: this.x, y: this.y + h, sizex: w, sizey: h, capacity:this.capacity }));
+        this.children.push(new Quadtree({ x: this.x + w, y: this.y + h, sizex: w, sizey: h, capacity:this.capacity }));
         this.hasSplit = true
     }
 
