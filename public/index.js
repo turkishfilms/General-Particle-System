@@ -15,22 +15,22 @@ function setup() {
     // background(100)
     background(150, 85, 35)
     createCanvas(windowWidth, windowHeight)
-    system = new ParticleSystem({ qtCapacities: [1, 2] })
+    system = new QTParticleSystem({ qtCapacities: [1, 2] })
     noStroke()
 
-    for (let k = 0; k < 2; k++) {
+    for (let k = 0; k < 5; k++) {
         system.addParticle(new PrimordialParticle({}))
     }
 
     // for (let k = 0; k < 100; k++) {
     //     system.addParticle(new InfectionParticle1({ qtIndex: 1, infectionLevel: 0.1, radius: 5, infectability: 0.1, stayHomeSick: true, infectionCap: 30, rgb: 2 }))
     // }
-    system.addParticle(new Jet({ cols: [
-            [200, 0, 0]
-        ] }))
-    system.addParticle(new Jet({ cols: [
-            [0, 0, 200]
-        ] }))
+// system.addParticle(new Jet({ cols: [
+//         [200, 0, 0]
+//     ] }))
+// system.addParticle(new Jet({ cols: [
+//         [0, 0, 200]
+//     ] }))
 
 }
 
