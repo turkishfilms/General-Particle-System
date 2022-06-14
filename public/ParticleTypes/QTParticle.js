@@ -20,8 +20,8 @@ class QTParticle extends BasicParticle {
         this.neighborsCount = this.neighbors.length
     }
 
-    findNeighbors() {
-        return this.qt.ask(this, this.neighbors)
+    findNeighbors(radius = this.r) {
+        return this.qt.ask({x:this.x,y:this.y, r: radius}, this.neighbors)
     }
 
     splitNeighbors() {

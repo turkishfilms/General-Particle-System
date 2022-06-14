@@ -1,44 +1,13 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Boid extends QTParticle.js{
-constructor({...options}={}){
+constructor({sepWeight = 0.5, aliWeight = 0.5, cohWeight = 0.5, separationRadius = 3, alignmentRadius = 3, ...options}={}){
     const {x,y,o,v=4,r,cols=[[255,255,255]],shouldShow,shouldMove,r,qtIndex} = options
     super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove, r: r, qtIndex: qtIndex, })
+    this.sepWeight = sepWeight
+    this.aliWeight = aliWeight
+    this.cohWeight = cohWeight
+    this.separationRadius = separationRadius
+    this.alignmentRadius = alignmentRadius
+    this.cohesionRadius = r
 }
 
 
@@ -50,20 +19,42 @@ nextStep(){
 }
 
 flock(n){
-
-    return{dv:0,do:0}
+const dSep = this.separation(),
+dAli = this.alignment(),
+dCoh = this.cohesion()
+    return{dV:(this.v * -1) + dSep.dV * sepWeight + dAli.dV * aliWeight + dCoh.dV * cohWeight, dO:(this.o * -1) + dSep.dO * this.sepWeight + dAli.dO * this.aliWeight + dCoh.dO * this.cohWeight }
 }
 
-congregate(){
+separation(){
+    const sepNeighbors = findNeighbors(separationRadius)
+    let d = {v:0,o:0}
+    sepNeighbors.forEach(n => {
+        if(n == this) return
+        d.v += 1 / distanceTo(n)
+        d.o += (findAngleToNeighbor(n)+PI)
+    })
+    return {dV: d.v / sepNeighbors.length, dO: d.o / sepNeighbors.length}
+}
+
+alignment(){
+
+    const aliNeighbors = findNeighbors(alignmentRadius)
+    let aliNSum = 0
+    for (let i = 0; i < aliNeighbors.length; i++) {aliNsum += aliNeighbors[i].o} 
+    let aliNAvg = [aliNsum/aliNeighbors.length]
+return sometrhing
 
 }
 
-repulsion(){
-
-}
-
-fluidization(){
-
+cohesion(){
+    const cohNeighbors = this.neighbors
+    let cohNSum = [0,0]
+    for (let i = 0; i < cohNeighbors.length; i++) {
+        cohNsum[0] += cohNeighbors[i].x
+        cohNsum[1] += cohNeighbors[i].y
+    } 
+    const cohNAvg = [cohNsum[0]/cohNeighbors.length, cohNsum[1]/cohNeighbors.length]
+    return 
 }
 
 correctColor(){
