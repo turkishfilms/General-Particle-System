@@ -1,6 +1,6 @@
 class Boid extends QTParticle.js{
 constructor({sepWeight = 0.5, aliWeight = 0.5, cohWeight = 0.5, separationRadius = 3, alignmentRadius = 3, ...options}={}){
-    const {x,y,o,v=4,r,cols=[[255,255,255]],shouldShow,shouldMove,r,qtIndex} = options
+    const {x,y,o,v=4,r,cols=[[255,255,255]],shouldShow,shouldMove,qtIndex} = options
     super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove, r: r, qtIndex: qtIndex, })
     this.sepWeight = sepWeight
     this.aliWeight = aliWeight
