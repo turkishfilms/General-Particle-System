@@ -19,7 +19,7 @@ function setup() {
     noStroke()
 
     for (let k = 0; k < numBirds; k++) {
-        system.addParticle(new BirdParticle({}))
+        system.addParticle(new Boid())
     }
 
     // for (let k = 0; k < 100; k++) {

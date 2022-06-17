@@ -8,7 +8,7 @@ class Jet extends QTParticle {
         turningSpeed = radians(10),
         ...options
     } = {}) {
-        const { x, y, o, v, radius, cols, shouldShow, shouldMove, qtIndex, r, neighbors } = options
+        const { x, y, o, radius, cols, shouldShow, shouldMove, qtIndex, neighbors } = options
         super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove, qtIndex: qtIndex, r: r, neighbors: neighbors })
         this.cycleDelay = cycleDelay
         this.atkVal = atkVal
