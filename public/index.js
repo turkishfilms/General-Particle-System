@@ -8,7 +8,7 @@
 
  */
 
-const numParticles = 400
+const numBirds = 40
 let system
 
 function setup() {
@@ -18,8 +18,8 @@ function setup() {
     system = new QTParticleSystem({ qtCapacities: [1, 2] })
     noStroke()
 
-    for (let k = 0; k < 5; k++) {
-        system.addParticle(new PrimordialParticle({}))
+    for (let k = 0; k < numBirds; k++) {
+        system.addParticle(new BirdParticle({}))
     }
 
     // for (let k = 0; k < 100; k++) {

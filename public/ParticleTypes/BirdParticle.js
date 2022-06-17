@@ -36,25 +36,24 @@ separation(){
     return {dV: d.v / sepNeighbors.length, dO: d.o / sepNeighbors.length}
 }
 
-alignment(){
-
+alignment(){ //align orientation
     const aliNeighbors = findNeighbors(alignmentRadius)
     let aliNSum = 0
     for (let i = 0; i < aliNeighbors.length; i++) {aliNsum += aliNeighbors[i].o} 
     let aliNAvg = [aliNsum/aliNeighbors.length]
-return sometrhing
+    return {dO:aliNAvg,dV:0}
 
 }
 
-cohesion(){
+cohesion(){ //go to avg pos of neighvbors
     const cohNeighbors = this.neighbors
     let cohNSum = [0,0]
     for (let i = 0; i < cohNeighbors.length; i++) {
         cohNsum[0] += cohNeighbors[i].x
         cohNsum[1] += cohNeighbors[i].y
     } 
-    const cohNAvg = [cohNsum[0]/cohNeighbors.length, cohNsum[1]/cohNeighbors.length]
-    return 
+    const cohNAvg = {x:cohNsum[0]/cohNeighbors.length, y:ohNsum[1]/cohNeighbors.length}
+    return {dO:findAngleToNeighbor(cohNAvg),dV:1/distanceToNeighbor(cohNAvg)}
 }
 
 correctColor(){
