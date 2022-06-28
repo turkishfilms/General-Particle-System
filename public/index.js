@@ -8,18 +8,17 @@
 
  */
 
-const numBirds = 40
+const numBirds = 400
 let system
 
 function setup() {
     // background(100)
     background(150, 85, 35)
     createCanvas(windowWidth, windowHeight)
-    system = new QTParticleSystem({ qtCapacities: [1, 2] })
+    system = new QTParticleSystem({ qtCapacities: [1] })
     noStroke()
-
     for (let k = 0; k < numBirds; k++) {
-        system.addParticle(new Boid())
+        system.addParticle(new Boid({v:3,sepWeight:1,aliWeight:0,cohWeight:0,separationRadius:50}))
     }
 
     // for (let k = 0; k < 100; k++) {
