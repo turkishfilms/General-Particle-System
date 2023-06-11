@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
+    "gpu.js": "^2.16.0",
     "nodemon": "^2.0.15"
   }
 }

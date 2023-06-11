@@ -1,5 +1,13 @@
 class InfectionParticle extends QTParticle {
-    constructor({ turning = radians(0.001), infectionLevel = 0, infectability = 0.5, infectionCap = 10, stayHomeSick = false, rgb = 0, ...options } = {}) {
+    constructor({
+        turning = radians(0.001),
+        infectionLevel = 0,
+        infectability = 0.5,
+        infectionCap = 10,
+        stayHomeSick = false,
+        rgb = 0,
+        ...options
+    } = {}) {
         const {
             x,
             y,
@@ -17,7 +25,18 @@ class InfectionParticle extends QTParticle {
             shouldMove,
             shouldShow,
         } = options
-        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove, r: r, qtIndex: qtIndex })
+        super({
+            x: x,
+            y: y,
+            o: o,
+            v: v,
+            radius: radius,
+            cols: cols,
+            shouldShow: shouldShow,
+            shouldMove: shouldMove,
+            r: r,
+            qtIndex: qtIndex
+        })
         this.turning = turning
         this.infectionLevel = infectionLevel
         this.infectability = infectability

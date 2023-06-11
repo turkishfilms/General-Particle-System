@@ -1,3 +1,4 @@
+
 /**
  * TODO
  * All particles have same orientation find out why //SOLVED: Basic Particle had cos(o) for both y and x
@@ -31,7 +32,18 @@ class PrimordialParticle extends QTParticle {
             shouldMove,
             shouldShow,
         } = options
-        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove, r: r, qtIndex: qtIndex, })
+        super({
+            x: x,
+            y: y,
+            o: o,
+            v: v,
+            radius: radius,
+            cols: cols,
+            shouldShow: shouldShow,
+            shouldMove: shouldMove,
+            r: r,
+            qtIndex: qtIndex,
+        })
 
         this.a = a // turning characteristic
         this.b = b // neighborly influence on a
@@ -51,6 +63,20 @@ class PrimordialParticle extends QTParticle {
         const { leftNeighbors, rightNeighbors } = this.splitNeighbors()
         // which way to turn
         const B = this.steer(leftNeighbors.length, rightNeighbors.length)
+
+        agents[i].colr += random(-20, 20) * (neighbors.length + 1);
+        agents[i].colg += random(-20, 20) * (neighbors.length + 1);
+        agents[i].colb += random(-20, 20) * (neighbors.length + 1);
+        constrain(this.colr, 0, 255);
+        constrain(this.colg, 0, 255);
+        constrain(this.colb, 0, 255);
+  
+        let r = random(-2, 2);
+        if (this.name) {
+          let min = 100;
+          this.radius = this.radius + r < min ? min : this.radius + r;
+        } else this.radius += r;
+
 
         return { deltaO: this.a + B, deltaV: 0, color: this.correctColor() }
     }

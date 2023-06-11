@@ -21,7 +21,18 @@ class SpeedParticle extends QTParticle {
                 r = radius,
                 qtIndex = 0,
         } = options
-        super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove, r: r, qtIndex: qtIndex, })
+        super({
+            x: x,
+            y: y,
+            o: o,
+            v: v,
+            radius: radius,
+            cols: cols,
+            shouldShow: shouldShow,
+            shouldMove: shouldMove,
+            r: r,
+            qtIndex: qtIndex,
+        })
         this.thresholds = thresholds.sort((a, b) => a - b).reverse()
         this.speedIncrement = speedIncrement
         this.box = this.initBox()
@@ -31,7 +42,11 @@ class SpeedParticle extends QTParticle {
         this.updateNeighbors()
         const collisions = this.neighborsCount - 1
         const color = this.correctColor()
-        return { deltaO: ((collisions > 0 || this.isOutOfBounds(box)) ? PI : 0), deltaV: (this.speedIncrement * collisions), color: color }
+        return {
+            deltaO: ((collisions > 0 || this.isOutOfBounds(box)) ? PI : 0),
+            deltaV: (this.speedIncrement * collisions),
+            color: color
+        }
     }
 
     initBox = () => {
