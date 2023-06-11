@@ -7,7 +7,11 @@ class Jet extends QTParticle {
 
         ...options
     } = {}) {
+<<<<<<< HEAD
         const { x, y, o, v = 2, radius, cols, shouldShow, shouldMove, qtIndex, r = 500, neighbors } = options
+=======
+        const { x, y, o, radius, cols, shouldShow, shouldMove, qtIndex, neighbors } = options
+>>>>>>> c23ea6b9efda7d5296c02cfb91b157bc67c719ef
         super({ x: x, y: y, o: o, v: v, radius: radius, cols: cols, shouldShow: shouldShow, shouldMove: shouldMove, qtIndex: qtIndex, r: r, neighbors: neighbors })
         this.cycleDelay = cycleDelay
         this.cycleIndex = 0

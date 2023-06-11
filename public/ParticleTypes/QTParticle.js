@@ -34,12 +34,17 @@ class QTParticle extends BasicParticle {
         this.neighborsCount = this.neighbors.length
     }
 
+<<<<<<< HEAD
     /**
      * Finds the neighbors of the particle.
      * @return {Array} - The array of neighboring particles.
      */
     findNeighbors() {
         return this.qt.ask(this, this.neighbors)
+=======
+    findNeighbors(radius = this.r) {
+        return this.qt.ask({x:this.x,y:this.y, r: radius}, this.neighbors)
+>>>>>>> c23ea6b9efda7d5296c02cfb91b157bc67c719ef
     }
 
     /**

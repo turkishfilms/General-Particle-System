@@ -68,6 +68,7 @@ class BasicParticle {
     show(col) {
         fill(col.r, col.g, col.b)
         ellipse(this.x, this.y, this.radius)
+        if(this.weirdShow) this.weirdShow()
     }
 
     /**
