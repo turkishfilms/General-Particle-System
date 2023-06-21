@@ -81,25 +81,25 @@ In this function, if the system is not paused (`system.simStatus` is true), we c
 ## Contributing
 
 ```javascript
-/**
- * BasicParticle Class - Represents a basic particle.
- */
 class BasicParticle {
-    /**
-     * Constructs a new BasicParticle instance.
-     * @param {Object} [options] - The options object.
-     * @param {number} [options.x=random(0, width)] - The x position.
-     * @param {number} [options.y=random(0, height)] - The y position.
-     * @param {number} [options.o=random(0, TWO_PI)] - The orientation.
-     * @param {number} [options.v=2] - The velocity.
-     * @param {number} [options.radius=15] - The radius.
-     * @param {Array<Array<number>>} [options.cols=[[255, 255, 0], [255, 0, 255], [0, 0, 255], [0, 255, 0]]] - The colors.
-     * @param {boolean} [options.shouldShow=true] - Whether to show the particle.
-     * @param {boolean} [options.shouldMove=true] - Whether the particle should move.
-     */
-    
     nextStep() {
         return { deltaV: 0, deltaO: 0 }
+    }
+}
+
+class QTParticle extends BasicParticle{
+    constructor(){
+        super()
+    }
+    //Quadtree functionality
+}
+
+class PrimordialParticle extends QTParticle{
+    constructor(){
+        super()
+    }
+    nextStep(){
+        returns { deltaV:100, deltaO:100 } // Primordial Particle movement 
     }
 }
 
