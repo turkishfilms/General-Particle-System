@@ -8,7 +8,7 @@
  * 
  */
 
-class Quadtree { 
+export default class Quadtree { 
     constructor({ x = 0, y = 0, sizex = width, sizey = height, capacity = 10 } = {}) {
         this.x = x;
         this.y = y;

@@ -7,6 +7,7 @@
  * encapsulate everything correctly
 
  */
+import PrimordialParticle from './ParticleTypes/PrimordialParticle'
 
 const numBirds = 400
 let system
@@ -16,8 +17,8 @@ function setup() {
     background(150, 85, 35)
     noStroke()
     system = new ParticleSystem({ qtCapacities: [1] })
-    for (let k = 0; k < 3000; k++) {
-        system.addParticle(new PrimordialParticle2({}))
+    for (let k = 0; k < numBirds; k++) {
+        system.addParticle(new PrimordialParticle({}))
     }
 }
 

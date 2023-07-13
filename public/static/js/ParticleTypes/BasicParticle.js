@@ -3,7 +3,7 @@
 /**
  * BasicParticle Class - Represents a basic particle.
  */
-class BasicParticle {
+export default class BasicParticle {
     /**
      * Constructs a new BasicParticle instance.
      * @param {Object} [options] - The options object.

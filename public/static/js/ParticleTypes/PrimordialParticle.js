@@ -1,4 +1,4 @@
-
+ 
 /**
  * TODO
  * All particles have same orientation find out why //SOLVED: Basic Particle had cos(o) for both y and x
@@ -7,8 +7,9 @@
 
 
  */
+import QTParticle from './QTParticle'
 
-class PrimordialParticle extends QTParticle {
+export default class PrimordialParticle extends QTParticle {
     constructor({
         a = PI * 1,
         b = radians(17 * 1),

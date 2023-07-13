@@ -99,7 +99,7 @@ class PrimordialParticle extends QTParticle{
         super()
     }
     nextStep(){
-        returns { deltaV:100, deltaO:100 } // Primordial Particle movement 
+        returns { deltaV:100, deltaO:100 } // Primordial Particle movemtne 
     }
 }
 

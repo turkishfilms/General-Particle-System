@@ -1,4 +1,6 @@
-class InfectionParticle extends QTParticle {
+import QTParticle from "./QTParticle"
+
+export default class InfectionParticle extends QTParticle {
     constructor({
         turning = radians(0.001),
         infectionLevel = 0,
